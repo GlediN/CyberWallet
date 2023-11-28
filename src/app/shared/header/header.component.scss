@@ -1,0 +1,27 @@
+::ng-deep ngb-modal-backdrop{
+  z-index: 1050 !important;
+  opacity: 0.5 !important;
+}
+header{
+  z-index: 1000;
+  position: sticky;
+  top:0;
+}
+.modal-backdrop {
+  z-index: 1050;
+}
+::ng-deep ngb-modal-window{
+  position: fixed !important;
+  top: 50%;
+  left: 50%;
+}
+/* Add this style to disable links when the modal is open */
+.modal-open {
+  pointer-events: none;
+  cursor: not-allowed;
+  color: #999; /* Optional: Change the color to indicate that the link is disabled */
+}
+
+
+
+
