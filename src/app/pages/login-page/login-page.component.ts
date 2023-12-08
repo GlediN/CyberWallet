@@ -12,7 +12,7 @@ import {UserService} from "../../user.service";
 })
 export class LoginPageComponent {
 
-  constructor(private modalService:NgbModal,userService:UserService,
+  constructor(private modalService:NgbModal,private userService:UserService,
               private router:Router) {
   }
   closeForm() {
@@ -23,20 +23,20 @@ export class LoginPageComponent {
   email: string = "";
   password: string = "";
   login() {
-    // const credentials = {
-    //   email: this.email,
-    //   password: this.password
-    // };
-    // this.userService.login(credentials).subscribe(
-    //   (response: any) => {
-    //     sessionStorage.setItem('token', response.token);
-    //     sessionStorage.setItem('email', response.email)
-    //     this.router.navigate(['/dashboard']);
-    //   },
-    //   (error) => {
-    //     console.error('Login failed:', error);
-    //   }
-    // );
+    const credentials = {
+      email: this.email,
+      password: this.password
+    };
+    this.userService.login(credentials).subscribe(
+      (response: any) => {
+        sessionStorage.setItem('token', response.token);
+        sessionStorage.setItem('email', response.email)
+        this.router.navigate(['/dashboard']);
+      },
+      (error) => {
+        console.error('Login failed:', error);
+      }
+    );
     this.modalService.dismissAll();
   }
 }
