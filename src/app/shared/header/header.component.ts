@@ -17,18 +17,5 @@ export class HeaderComponent {
 
   openLoginForm() {
     const modalRef = this.modalService.open(LoginPageComponent);
-
-    modalRef.result
-      .then(
-        () => {
-          this.isLoginFormOpen = false;
-        },
-        () => {
-          this.isLoginFormOpen = false;
-        }
-      )
-      .finally(() => {
-        this.isLoginFormOpen = false;
-      });
   }
 }

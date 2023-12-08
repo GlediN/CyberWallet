@@ -1,6 +1,8 @@
-import {Component, NgZone} from '@angular/core';
+import {Component} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {Router} from "@angular/router";
+import {SharedService} from "../../services/shared.service";
+import {UserService} from "../../user.service";
 
 
 @Component({
@@ -10,17 +12,17 @@ import {Router} from "@angular/router";
 })
 export class LoginPageComponent {
 
-  constructor(private modalService:NgbModal) {
+  constructor(private modalService:NgbModal,userService:UserService,
+              private router:Router) {
   }
   closeForm() {
     this.modalService.dismissAll();
-    document.body.classList.remove('modal-open');
   }
+
+
   email: string = "";
   password: string = "";
-
   login() {
-    this.closeForm();
     // const credentials = {
     //   email: this.email,
     //   password: this.password
@@ -28,13 +30,13 @@ export class LoginPageComponent {
     // this.userService.login(credentials).subscribe(
     //   (response: any) => {
     //     sessionStorage.setItem('token', response.token);
-    //     sessionStorage.setItem('email',response.email);
+    //     sessionStorage.setItem('email', response.email)
     //     this.router.navigate(['/dashboard']);
     //   },
     //   (error) => {
     //     console.error('Login failed:', error);
     //   }
     // );
-    // this.modalService.dismissAll();
+    this.modalService.dismissAll();
   }
 }
