@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {Router} from "@angular/router";
-import {SharedService} from "../../services/shared.service";
 import {UserService} from "../../user.service";
 
 

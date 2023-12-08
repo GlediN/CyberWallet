@@ -13,8 +13,6 @@ import {FormsModule} from "@angular/forms";
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { TransactionPageComponent } from './pages/transaction-page/transaction-page.component';
-import {AuthInterceptorInterceptor} from "./services/auth-interceptor.interceptor";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
 
 @NgModule({
@@ -35,12 +33,7 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
     AppRoutingModule,
     FormsModule,
   ],
-   providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptorInterceptor,
-    multi: true
-  }
-  ],
+   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
