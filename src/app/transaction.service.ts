@@ -11,10 +11,18 @@ export class TransactionService {
 
   constructor(private httpClient:HttpClient) { }
 
-
   transaction(data: any): Observable<any> {
-    return this.httpClient.post(this.url + "/transaction", data, {
-      headers: new HttpHeaders().set('Content-Type', 'application/json')
-    });
-  }
-}
+    // Get the token from wherever it is stored (e.g., sessionStorage, localStorage)
+    const token = sessionStorage.getItem('token');
+
+    // Add the authorization header if a token is available
+    const headers = token
+      ? new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+      : new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.httpClient.post(this.url + "/transaction", data, { headers });
+
+  }}

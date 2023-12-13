@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {LoginPageComponent} from "../login-page/login-page.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TransactionPageComponent} from "../transaction-page/transaction-page.component";
+import {HttpClient} from "@angular/common/http";
+import {TransactionService} from "../../transaction.service";
 
 interface TransactionData {
   transactionId: string;
@@ -50,21 +52,20 @@ export class UserDashboardComponent {
     },
     // Add more dummy data as needed
   ];
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal,private http: HttpClient,private transactionService:TransactionService) {}
+
 
 
   // Custom condition to check if a transaction is successful
   isTransactionSuccessful(transactionStatus: boolean): boolean {
-    return transactionStatus === true;
+    return transactionStatus;
   }
 
   // Method to get the CSS class based on transaction status
   getBadgeClass(transactionStatus: boolean): string {
     return this.isTransactionSuccessful(transactionStatus) ? 'badge bg-success rounded-3 fw-semibold' : 'badge bg-danger rounded-3 fw-semibold';
   }
-  openLoginForm() {
+  openTransactionForm() {
     const modalRef = this.modalService.open(TransactionPageComponent,{size:"lg"});
   }
-
-
 }

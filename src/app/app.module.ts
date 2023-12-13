@@ -13,6 +13,8 @@ import {FormsModule} from "@angular/forms";
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { TransactionPageComponent } from './pages/transaction-page/transaction-page.component';
+import { HttpClientModule } from '@angular/common/http';
+import { TransactionSuccesPageComponent } from './pages/transaction-succes-page/transaction-succes-page.component';
 
 
 @NgModule({
@@ -27,11 +29,13 @@ import { TransactionPageComponent } from './pages/transaction-page/transaction-p
     LoginPageComponent,
     SignupPageComponent,
     TransactionPageComponent,
+    TransactionSuccesPageComponent,
   ], imports: [
     BrowserModule,
     NgbModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule
   ],
    providers: [],
   bootstrap: [AppComponent]

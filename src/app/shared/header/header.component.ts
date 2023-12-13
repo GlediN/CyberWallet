@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClient} from "@angular/common/http";
 import {LoginPageComponent} from "../../pages/login-page/login-page.component";
+import {HomePageComponent} from "../../pages/home-page/home-page.component";
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,9 @@ export class HeaderComponent {
   constructor(private modalService: NgbModal) {}
 
   openLoginForm() {
-    const modalRef = this.modalService.open(LoginPageComponent);
+     this.modalService.open(LoginPageComponent);
+
   }
+
+    protected readonly HomePageComponent = HomePageComponent;
 }

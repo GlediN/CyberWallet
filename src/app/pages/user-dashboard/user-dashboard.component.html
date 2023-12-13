@@ -22,8 +22,11 @@
      data-sidebar-position="fixed" data-header-position="fixed">
   <div class="body-wrapper">
     <div class="container-fluid d-flex justify-content-end p-4">
-      <button type="button" class="btn btn-dark" (click)="openLoginForm()">New Transaction</button>
+      <button type="button" class="btn btn-dark" (click)="openTransactionForm()">New Transaction</button>
     </div>
+
+    <!-- Inside your HTML template -->
+
     <div class="container-fluid d-flex justify-content-left">
       <div class="col-lg-8 d-flex align-items-stretch">
         <div class="card w-100">
@@ -36,7 +39,6 @@
                 <tr>
                   <th class="border-bottom-0">Id</th>
                   <th class="border-bottom-0">Recipent</th>
-                  <th class="border-bottom-0"></th>
                   <th class="border-bottom-0">Status</th>
                   <th class="border-bottom-0">Amount</th>
                   <th class="border-bottom-0">Transaction Time</th>
@@ -47,7 +49,6 @@
                 <tr *ngFor="let userData of userArray">
                   <td>{{ userData.transaction.transactionId }}</td>
                   <td>{{ userData.name }}</td>
-                  <td></td>
                   <td>
                     <div class="d-flex align-items-center gap-2">
                       <span [class]="getBadgeClass(userData.transaction.transactionStatus)">
