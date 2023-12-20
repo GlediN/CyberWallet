@@ -15,6 +15,7 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { TransactionPageComponent } from './pages/transaction-page/transaction-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TransactionSuccesPageComponent } from './pages/transaction-succes-page/transaction-succes-page.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { TransactionSuccesPageComponent } from './pages/transaction-succes-page/
     SignupPageComponent,
     TransactionPageComponent,
     TransactionSuccesPageComponent,
+    AdminDashboardComponent,
   ], imports: [
     BrowserModule,
     NgbModule,
