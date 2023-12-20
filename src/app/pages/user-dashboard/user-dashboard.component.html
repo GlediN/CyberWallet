@@ -38,26 +38,20 @@
                 <thead class="text-white fs-4">
                 <tr>
                   <th class="border-bottom-0">Id</th>
-                  <th class="border-bottom-0">Recipent</th>
-                  <th class="border-bottom-0">Status</th>
+                  <th class="border-bottom-0">Recipient</th>
                   <th class="border-bottom-0">Amount</th>
                   <th class="border-bottom-0">Transaction Time</th>
+                  <th class="border-bottom-0">Description</th>
                   <th class="border-bottom-0">Download Details</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let userData of userArray">
-                  <td>{{ userData.transaction.transactionId }}</td>
-                  <td>{{ userData.name }}</td>
-                  <td>
-                    <div class="d-flex align-items-center gap-2">
-                      <span [class]="getBadgeClass(userData.transaction.transactionStatus)">
-                        {{ isTransactionSuccessful(userData.transaction.transactionStatus) ? 'Completed' : 'Failed' }}
-                      </span>
-                    </div>
-                  </td>
-                  <td>${{ userData.transaction.transactionAmount }}</td>
-                  <td>{{ userData.transaction.time }}</td>
+                <tr *ngFor="let userData of recentTransactions">
+                  <td class="small">{{ userData.id }}</td>
+                  <td>{{ userData.recipient }}</td>
+                  <td>${{ userData.amount }}</td>
+                  <td>{{ userData.dateOfTransaction }}</td>
+                  <td>{{ userData.description }}</td>
                   <td>
                     <a href="/dashboard">
                       <button type="button" class="btn btn-dark m-1">Download</button>

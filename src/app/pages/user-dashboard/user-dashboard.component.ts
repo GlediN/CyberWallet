@@ -1,60 +1,33 @@
-import { Component } from '@angular/core';
-import {LoginPageComponent} from "../login-page/login-page.component";
+import {Component, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TransactionPageComponent} from "../transaction-page/transaction-page.component";
 import {HttpClient} from "@angular/common/http";
 import {TransactionService} from "../../transaction.service";
 
-interface TransactionData {
-  transactionId: string;
-  transactionAmount: string;
-  transactionStatus: boolean;
-  time: string;
+export interface Transaction {
+  id: string;
+  recipient: string;
+  amount: string;
+  dateOfTransaction: string;
+  description: string;
 }
 
-interface UserData {
-  name: string;
-  email: string;
-  contactNumber: string;
-  address: string;
-  transaction: TransactionData;
-}
 @Component({
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
-  styleUrl: './user-dashboard.component.scss'
+  styleUrls: ['./user-dashboard.component.scss']  // Fix the typo here, it should be 'styleUrls' instead of 'styleUrl'
 })
-export class UserDashboardComponent {
-  userArray: UserData[] = [
-    {
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      contactNumber: '1234567890',
-      address: '123 Main St',
-      transaction: {
-        transactionId: '1',
-        transactionAmount: '200',
-        transactionStatus: true,
-        time: '2023-11-28T12:00:00Z'
-      }
-    },
-    {
-      name: 'Jane Smith',
-      email: 'jane.smith@example.com',
-      contactNumber: '9876543210',
-      address: '456 Oak St',
-      transaction: {
-        transactionId: '2',
-        transactionAmount: '500',
-        transactionStatus: false,
-        time: '2023-11-29T14:30:00Z'
-      }
-    },
-    // Add more dummy data as needed
-  ];
-  constructor(private modalService: NgbModal,private http: HttpClient,private transactionService:TransactionService) {}
+export class UserDashboardComponent implements OnInit {
+  id: string = '';
+  recipient: string = '';
+  amount: string = '';
+  dateOfTransaction: string = '';
+  description: string = '';
 
+  recentTransactions: Transaction[] = [];
 
+  constructor(private modalService: NgbModal, private http: HttpClient, private transactionService: TransactionService) {
+  }
 
   // Custom condition to check if a transaction is successful
   isTransactionSuccessful(transactionStatus: boolean): boolean {
@@ -65,7 +38,24 @@ export class UserDashboardComponent {
   getBadgeClass(transactionStatus: boolean): string {
     return this.isTransactionSuccessful(transactionStatus) ? 'badge bg-success rounded-3 fw-semibold' : 'badge bg-danger rounded-3 fw-semibold';
   }
+
   openTransactionForm() {
-    const modalRef = this.modalService.open(TransactionPageComponent,{size:"lg"});
+    const modalRef = this.modalService.open(TransactionPageComponent, {size: "lg"});
   }
+
+  ngOnInit() {
+    const userEmail = sessionStorage.getItem('email'); // Replace with the actual user email
+    // @ts-ignore
+    this.transactionService.getRecentTransactions(userEmail).subscribe(
+      (response) => {
+        // Handle the response
+        console.log('Recent Transactions:', response);
+        this.recentTransactions = response;
+      },
+      (error) => {
+        console.error('Error fetching recent transactions:', error);
+      }
+    );
+  }
+
 }
