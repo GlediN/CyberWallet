@@ -11,6 +11,9 @@ export interface Transaction {
   dateOfTransaction: string;
   description: string;
 }
+interface UserNameResponse {
+  name: string;
+}
 
 @Component({
   selector: 'app-user-dashboard',
@@ -25,6 +28,7 @@ export class UserDashboardComponent implements OnInit {
   description: string = '';
 
   recentTransactions: Transaction[] = [];
+  userName:string='';
 
   constructor(private modalService: NgbModal, private http: HttpClient, private transactionService: TransactionService) {
   }
@@ -55,7 +59,20 @@ export class UserDashboardComponent implements OnInit {
       (error) => {
         console.error('Error fetching recent transactions:', error);
       }
+    )
+    // @ts-ignore
+    this.transactionService.getUserName(userEmail).subscribe(
+      (response: UserNameResponse) => {
+        // Handle the response
+        console.log('Your username:', response.name);
+        this.userName = response.name;
+      },
+      (error) => {
+        console.error('Error fetching your username:', error);
+      }
     );
+
+
   }
 
 }
