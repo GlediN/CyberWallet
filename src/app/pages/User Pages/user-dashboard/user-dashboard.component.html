@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="">
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="/src/assets/css/bootstrap.css"/>
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet"/>
+  <!-- font awesome style -->
+  <!-- Custom styles for this template -->
+  <link href="/src/assets/css/style.css" rel="stylesheet"/>
+  <!-- responsive style -->
+  <link href="/src/assets/css/responsive.css" rel="stylesheet"/>
+  <script src="/src/assets/js/bootstrap.js"></script>
+  <script src="/src/assets/js/custom.js"></script>
+</head>
+
+<body>
+<!-- Body Wrapper -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+  <div class="body-wrapper">
+    <div class="container-fluid d-flex justify-content-start p-4" *ngIf="userName && userName.trim() !== ''">
+      <h3 class="d-flex justify-content-left">Hello {{userName}}</h3>
+    </div>
+    <div class="card-body">
+        <label for="transactionType">Your balance</label>
+    </div>
+    <!-- Inside your HTML template -->
+    <div class="row">
+      <div class="col-lg-8 ml-4">
+        <div class="card w-100">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between mb-4">
+              <h5 class="card-title font-weight-bold">Recent Transactions</h5>
+            </div>
+            <div class="table-responsive">
+              <table class="table text-nowrap mb-0 align-middle">
+                <thead class="text-white fs-4">
+                <tr>
+                  <th class="border-bottom-0">Id</th>
+                  <th class="border-bottom-0">Recipient</th>
+                  <th class="border-bottom-0">Amount</th>
+                  <th class="border-bottom-0">Transaction Time</th>
+                  <th class="border-bottom-0">Description</th>
+                  <th class="border-bottom-0">Download Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let userData of recentTransactions">
+                  <td class="small">{{ userData.id }}</td>
+                  <td>{{ userData.recipient }}</td>
+                  <td>${{ userData.amount }}</td>
+                  <td>{{ userData.dateOfTransaction }}</td>
+                  <td>{{ userData.description }}</td>
+                  <td>
+                    <a href="/dashboard">
+                      <button type="button" class="btn btn-dark m-1">Download</button>
+                    </a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8 ml-4">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i class="fas fa-money-bill"></i>
+              New Transaction
+            </h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <form #transactionForm="ngForm" (ngSubmit)="openTransactionForm(transactionForm)">
+              <label for="transactionType">Select Transaction Type</label>
+              <br>
+              <select id="transactionType" name="transactionType" [(ngModel)]="transactionFormValue" required>
+                <option value="deposit">Deposit</option>
+                <option value="withdraw">Withdraw</option>
+                <option value="transfer">Transfer</option>
+              </select>
+              <br>
+              <input type="submit" value="Submit">
+            </form>
+
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+</html>

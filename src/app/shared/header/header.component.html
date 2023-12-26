@@ -1,5 +1,8 @@
 <head>
-  <!-- your existing stylesheets and scripts -->
+  <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet"/>
+  <link href="/assets/css/style.css" rel="stylesheet"/>
+  <link href="/assets/css/responsive.css" rel="stylesheet"/>
 </head>
 <body>
 <header class="header_section long_section px-0">
@@ -7,18 +10,23 @@
     <a class="navbar-brand" href="">
       <span>CyberWallet</span>
     </a>
+    <ng-container *ngIf="isLoggedIn; else showContent">
+          <p></p>
+    </ng-container>
 
-    <!-- Move the login and signup buttons outside the collapsible section -->
-    <div class="quote_btn-container d-lg-none">
-      <a (click)="openLoginForm()">
-        <span>Login</span>
-        <i class="fa fa-user" aria-hidden="true"></i>
-      </a>
-      <a (click)="openLoginForm()">
-        <span>Sign Up</span>
-        <i class="fa fa-user-plus"></i>
-      </a>
-    </div>
+    <ng-template #showContent>
+      <div class="quote_btn-container d-lg-none">
+        <a (click)="openLoginForm()">
+          <span>Login</span>
+          <i class="fa fa-user" aria-hidden="true"></i>
+        </a>
+        <a (click)="openLoginForm()">
+          <span>Sign Up</span>
+          <i class="fa fa-user-plus"></i>
+        </a>
+      </div>
+    </ng-template>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="d-flex mx-auto flex-column flex-lg-row align-items-center">
         <ul class="navbar-nav">
@@ -34,8 +42,6 @@
         </ul>
       </div>
     </div>
-
-    <!-- Move the login and signup buttons outside the collapsible section for larger screens -->
     <div class="quote_btn-container d-none d-lg-flex">
       <a (click)="openLoginForm()">
         <span>Login</span>
@@ -48,8 +54,4 @@
     </div>
   </nav>
 </header>
-
-<!-- your existing content -->
-
-<!-- your existing scripts -->
 </body>

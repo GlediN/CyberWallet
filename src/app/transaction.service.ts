@@ -22,6 +22,34 @@ export class TransactionService {
 
     return this.httpClient.post(this.url + "/transaction", data, {headers});
   }
+  deposit(data: any): Observable<any> {
+    // Get the token from wherever it is stored (e.g., sessionStorage, localStorage)
+    const token = sessionStorage.getItem('token');
+
+    // Add the authorization header if a token is available
+    const headers = token
+      ? new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+      : new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.httpClient.post(this.url + "/deposit", data, {headers});
+  }
+  withdraw(data: any): Observable<any> {
+    // Get the token from wherever it is stored (e.g., sessionStorage, localStorage)
+    const token = sessionStorage.getItem('token');
+
+    // Add the authorization header if a token is available
+    const headers = token
+      ? new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+      : new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.httpClient.post(this.url + "/withdraw", data, {headers});
+  }
   getRecentTransactions(email: string): Observable<any> {
     const token = sessionStorage.getItem('token');
 
@@ -48,5 +76,21 @@ export class TransactionService {
       : new HttpHeaders().set('Content-Type', 'application/json');
     const data = { email: email };
     return this.httpClient.post<string>(this.url + "/getUsername", data, { headers });
+  }
+  getAllRecentTransactions(email: string): Observable<any> {
+    const token = sessionStorage.getItem('token');
+
+    // Add the authorization header if a token is available
+    const headers = token
+      ? new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      })
+      : new HttpHeaders().set('Content-Type', 'application/json');
+
+    // Prepare the data object with the "email" parameter
+    const data = { email: email };
+
+    return this.httpClient.post(this.url + "/getAllRecentTransactions", data, { headers });
   }
 }

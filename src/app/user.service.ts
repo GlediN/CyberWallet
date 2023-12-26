@@ -24,5 +24,21 @@ export class UserService {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
   }
+  isAdmin(email: string): Observable<any> {
+    const token = sessionStorage.getItem('token');
+
+    // Add the authorization header if a token is available
+    const headers = token
+      ? new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      })
+      : new HttpHeaders().set('Content-Type', 'application/json');
+
+    // Prepare the data object with the "email" parameter
+    const data = { email: email };
+
+    return this.httpClient.post(this.url + "/isAdmin", data, { headers });
+  }
 
 }
