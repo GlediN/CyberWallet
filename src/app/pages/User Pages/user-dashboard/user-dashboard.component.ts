@@ -20,6 +20,9 @@ export interface Transaction {
 interface UserNameResponse {
   name: string;
 }
+interface UserBalanceResponse {
+  balance:number;
+}
 
 @Component({
   selector: 'app-user-dashboard',
@@ -102,6 +105,17 @@ export class UserDashboardComponent implements OnInit {
         (error) => {
           console.error('Error:', error);
           this.router.navigate([''])
+        }
+      )
+      // @ts-ignore
+      this.userService.getBalance(userEmail).subscribe(
+        (response) => {
+          // Handle the response
+          console.log('Balance:', response);
+          this.userBalance=response.balance;
+        },
+        (error) => {
+          console.error('Error:', error);
         }
       )
   })}
