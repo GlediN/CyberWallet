@@ -4,6 +4,7 @@ import {TransactionService} from "../../../transaction.service";
 import {Router} from "@angular/router";
 import {TransactionSuccesPageComponent} from "../../Response  Pages/transaction-succes-page/transaction-succes-page.component";
 import {TransactionFailedPageComponent} from "../../Response  Pages/transaction-failed-page/transaction-failed-page.component";
+import {DepositService} from "../../../deposit.service";
 
 @Component({
   selector: 'app-deposit-page',
@@ -11,7 +12,7 @@ import {TransactionFailedPageComponent} from "../../Response  Pages/transaction-
   styleUrl: './deposit-page.component.scss'
 })
 export class DepositPageComponent {
-  constructor(private modalService: NgbModal, private transactionService: TransactionService, private router: Router) {
+  constructor(private modalService: NgbModal, private transactionService: TransactionService, private router: Router,private depositService:DepositService) {
   }
   code:string='';
   amount:number=0;
@@ -21,21 +22,12 @@ export class DepositPageComponent {
   }
 
   transaction() {
-    let email = sessionStorage.getItem("email");
-    if(!email) {
-      this.modalService.dismissAll();
-      this.modalService.open(TransactionFailedPageComponent)
-      console.error("Email not found in session storage");
-      return;
-    }
-
-    const transactionDetails = {
+   const transactionDetails = {
       code:this.code,
       amount: this.amount,
-      email: email,
-    };
+    }
 
-    this.transactionService.deposit(transactionDetails).subscribe(
+    this.depositService.deposit(transactionDetails).subscribe(
       (error) => {
         console.log(transactionDetails);
         this.modalService.open(TransactionSuccesPageComponent)
@@ -43,8 +35,11 @@ export class DepositPageComponent {
       (error) => {
         this.modalService.open(TransactionFailedPageComponent);
         console.error('Transaction failed:', error);
+        console.log(transactionDetails)
       }
     );
     this.modalService.dismissAll();
   }
+
+
 }

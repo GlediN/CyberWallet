@@ -22,20 +22,6 @@ export class TransactionService {
 
     return this.httpClient.post(this.url + "/transaction", data, {headers});
   }
-  deposit(data: any): Observable<any> {
-    // Get the token from wherever it is stored (e.g., sessionStorage, localStorage)
-    const token = sessionStorage.getItem('token');
-
-    // Add the authorization header if a token is available
-    const headers = token
-      ? new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      })
-      : new HttpHeaders().set('Content-Type', 'application/json');
-
-    return this.httpClient.post(this.url + "/deposit", data, {headers});
-  }
   withdraw(data: any): Observable<any> {
     // Get the token from wherever it is stored (e.g., sessionStorage, localStorage)
     const token = sessionStorage.getItem('token');

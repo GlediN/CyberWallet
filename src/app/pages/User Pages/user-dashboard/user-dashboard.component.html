@@ -27,9 +27,7 @@
       <h4 class="d-flex justify-content-left">Your balance is  ${{userBalance}}</h4>
 
     </div>
-    <!-- Inside your HTML template -->
     <div class="row">
-
       <div class="col-lg-8 ml-4">
         <div class="card">
           <div class="card-header">
@@ -51,15 +49,11 @@
               <br>
               <input type="submit" value="Submit">
             </form>
-
           </div>
           <!-- /.card-body -->
         </div>
         <!-- /.card -->
       </div>
-    </div>
-  </div>
-
 
       <div class="col-lg-8 ml-4">
         <div class="card w-100">
@@ -87,7 +81,7 @@
                   <td>{{ userData.dateOfTransaction }}</td>
                   <td>{{ userData.description }}</td>
                   <td>
-                    <a href="/dashboard">
+                    <a href="/dashboard/{{ userData.id }}">
                       <button type="button" class="btn btn-dark m-1">Download</button>
                     </a>
                   </td>
@@ -98,9 +92,10 @@
           </div>
         </div>
       </div>
-
-
+    </div>
+  </div>
 </div>
 </body>
+
 
 </html>
