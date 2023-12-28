@@ -27,6 +27,9 @@ import { WithdrawPageComponent } from './pages/User Pages/withdraw-page/withdraw
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { LoginFailedPageComponent } from './pages/Response  Pages/login-failed-page/login-failed-page.component';
 import {NgOptimizedImage} from "@angular/common";
+import { EditUsersComponent } from './pages/admin-dashboard/edit-users/edit-users.component';
+import { UserNameEditorComponent } from './pages/admin-dashboard/ModalPages/user-name-editor/user-name-editor.component';
+import { UserEditedSuccesfullyPageComponent } from './pages/admin-dashboard/ModalPages/user-edited-succesfully-page/user-edited-succesfully-page.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,9 @@ import {NgOptimizedImage} from "@angular/common";
     TransactionFailedPageComponent,
     WithdrawPageComponent,
     LoginFailedPageComponent,
+    EditUsersComponent,
+    UserNameEditorComponent,
+    UserEditedSuccesfullyPageComponent,
   ], imports: [
     BrowserModule,
     NgbModule,

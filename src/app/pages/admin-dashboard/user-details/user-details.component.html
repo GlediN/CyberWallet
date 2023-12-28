@@ -1,1 +1,37 @@
-<p>user-details works!</p>
+<div class="card w-100">
+  <div class=" card-body p-4">
+    <div class="d-flex justify-content-between mb-4">
+      <h5 class="card-title font-weight-bold">Users</h5>
+    </div>
+    <table class="data-table table stripe hover nowrap">
+      <thead>
+      <tr>
+        <th class="table-plus datatable-nosort">User Id</th>
+        <th class="table-plus datatable-nosort">Name</th>
+        <th>Address</th>
+        <th>Balance</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let userData of users">
+        <td>{{userData.id}}</td>
+        <td>{{userData.name}}</td>
+        <td>{{userData.address}}</td>
+        <td>{{userData.balance}}</td>
+        <td>{{userData.email}}</td>
+        <td>{{userData.role}}</td>
+        <td>
+          <a class="btn btn-link" (click)="getUsers()">
+            <img src="https://icons.iconarchive.com/icons/pictogrammers/material/128/pencil-box-multiple-icon.png"
+                 width="20" height="20">
+            <span>Edit</span>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

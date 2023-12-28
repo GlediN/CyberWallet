@@ -10,11 +10,6 @@
     <a class="navbar-brand" href="">
       <span>CyberWallet</span>
     </a>
-    <ng-container *ngIf="isLoggedIn; else showContent">
-          <p></p>
-    </ng-container>
-
-    <ng-template #showContent>
       <div class="quote_btn-container d-lg-none">
         <a (click)="openLoginForm()">
           <span>Login</span>
@@ -25,8 +20,6 @@
           <i class="fa fa-user-plus"></i>
         </a>
       </div>
-    </ng-template>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="d-flex mx-auto flex-column flex-lg-row align-items-center">
         <ul class="navbar-nav">
