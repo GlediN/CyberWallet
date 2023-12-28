@@ -30,7 +30,8 @@ export class DepositPageComponent {
     this.depositService.deposit(transactionDetails).subscribe(
       (error) => {
         console.log(transactionDetails);
-        this.modalService.open(TransactionSuccesPageComponent)
+        sessionStorage.setItem('showDepositTransactionSuccessModal', 'true');
+        window.location.reload();
       },
       (error) => {
         this.modalService.open(TransactionFailedPageComponent);

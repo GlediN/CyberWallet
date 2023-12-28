@@ -67,13 +67,32 @@ export class UserDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    const withdrawModal = sessionStorage.getItem('showWithdrawTransactionSuccessModal');
+    const depositModal = sessionStorage.getItem('showDepositTransactionSuccessModal');
+    const transferModal = sessionStorage.getItem('showTransactionSuccessModal');
+    if (withdrawModal === 'true') {
+      // Show the modal
+      this.modalService.open(TransactionSuccesPageComponent);
+      // Clear the stored information
+      sessionStorage.removeItem('showTransactionSuccessModal');
+    }
+    if (depositModal === 'true') {
+      // Show the modal
+      this.modalService.open(TransactionSuccesPageComponent);
+      // Clear the stored information
+      sessionStorage.removeItem('showDepositTransactionSuccessModal');
+    }
+    if (transferModal === 'true'){
+      this.modalService.open(TransactionSuccesPageComponent);
+      sessionStorage.removeItem('showTransactionSuccessModal');
+    }
+
     this.zone.run(() => {
     const userEmail = sessionStorage.getItem('email');
     // @ts-ignore
     this.transactionService.getRecentTransactions(userEmail).subscribe(
       (response) => {
         // Handle the response
-        console.log('Recent Transactions:', response);
         this.recentTransactions = response;
       },
       (error) => {
@@ -84,7 +103,6 @@ export class UserDashboardComponent implements OnInit {
     this.transactionService.getUserName(userEmail).subscribe(
       (response: UserNameResponse) => {
         // Handle the response
-        console.log('Your username:', response.name);
         this.userName = response.name;
       },
       (error) => {
@@ -95,7 +113,6 @@ export class UserDashboardComponent implements OnInit {
        this.userService.isAdmin(userEmail).subscribe(
         (response) => {
           // Handle the response
-          console.log('Is user an admin:', response);
           if (response==true){
             this.router.navigate(['/admin'])
           }else if (response==false){
@@ -111,7 +128,6 @@ export class UserDashboardComponent implements OnInit {
       this.userService.getBalance(userEmail).subscribe(
         (response) => {
           // Handle the response
-          console.log('Balance:', response);
           this.userBalance=response.balance;
         },
         (error) => {

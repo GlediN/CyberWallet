@@ -43,7 +43,8 @@ export class TransactionPageComponent {
         console.log(transactionDetails);
         // Write your navigation logic here. For instance:
         // this.router.navigate(['/dashboard']);
-        this.modalService.open(TransactionSuccesPageComponent)
+        sessionStorage.setItem('showTransactionSuccessModal', 'true');
+        window.location.reload();
 
       },
       (error) => {

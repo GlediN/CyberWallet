@@ -30,19 +30,18 @@ export class WithdrawPageComponent {
 
     const transactionDetails = {
       amount: this.amount,
-      email: email,
     };
 
     this.transactionService.withdraw(transactionDetails).subscribe(
       (error) => {
         console.log(transactionDetails);
         // Write your navigation logic here. For instance:
-        // this.router.navigate(['/dashboard']);
-        this.modalService.open(TransactionSuccesPageComponent)
-
+        sessionStorage.setItem('showWithdrawTransactionSuccessModal', 'true');
+        window.location.reload();
       },
       (error) => {
         console.error('Transaction failed:', error);
+        this.modalService.open(TransactionFailedPageComponent)
       }
     );
 

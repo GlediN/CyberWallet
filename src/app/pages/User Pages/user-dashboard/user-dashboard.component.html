@@ -70,7 +70,6 @@
                   <th class="border-bottom-0">Amount</th>
                   <th class="border-bottom-0">Transaction Time</th>
                   <th class="border-bottom-0">Description</th>
-                  <th class="border-bottom-0">Download Details</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -80,11 +79,6 @@
                   <td>${{ userData.amount }}</td>
                   <td>{{ userData.dateOfTransaction }}</td>
                   <td>{{ userData.description }}</td>
-                  <td>
-                    <a href="/dashboard/{{ userData.id }}">
-                      <button type="button" class="btn btn-dark m-1">Download</button>
-                    </a>
-                  </td>
                 </tr>
                 </tbody>
               </table>

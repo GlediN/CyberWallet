@@ -34,7 +34,7 @@ export class TransactionService {
       })
       : new HttpHeaders().set('Content-Type', 'application/json');
 
-    return this.httpClient.post(this.url + "/withdraw", data, {headers});
+    return this.httpClient.post(this.url + "/api/withdraw", data, {headers});
   }
   getRecentTransactions(email: string): Observable<any> {
     const token = sessionStorage.getItem('token');
