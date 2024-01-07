@@ -30,11 +30,6 @@ interface UserBalanceResponse {
   styleUrls: ['./user-dashboard.component.scss']  // Fix the typo here, it should be 'styleUrls' instead of 'styleUrl'
 })
 export class UserDashboardComponent implements OnInit {
-  id: string = '';
-  recipient: string = '';
-  amount: string = '';
-  dateOfTransaction: string = '';
-  description: string = '';
 
   recentTransactions: Transaction[] = [];
   userName:string='';

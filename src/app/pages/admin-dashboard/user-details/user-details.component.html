@@ -9,8 +9,9 @@
         <th class="table-plus datatable-nosort">User Id</th>
         <th class="table-plus datatable-nosort">Name</th>
         <th>Address</th>
-        <th>Balance</th>
         <th>Email</th>
+        <th>Balance</th>
+        <th>Date Of Register</th>
         <th>Role</th>
         <th>Action</th>
       </tr>
@@ -20,8 +21,9 @@
         <td>{{userData.id}}</td>
         <td>{{userData.name}}</td>
         <td>{{userData.address}}</td>
-        <td>{{userData.balance}}</td>
         <td>{{userData.email}}</td>
+        <td>{{userData.balance}}</td>
+        <td>{{userData.dateOfRegister}}</td>
         <td>{{userData.role}}</td>
         <td>
           <a class="btn btn-link" (click)="getUsers()">

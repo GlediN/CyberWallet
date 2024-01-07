@@ -5,6 +5,10 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {HttpClient} from "@angular/common/http";
 import {TransactionService} from "../../../transaction.service";
 import {EditUsersComponent} from "../edit-users/edit-users.component";
+import {AdminService} from "../../../admin.service";
+import {
+  UserEditedSuccesfullyPageComponent
+} from "../ModalPages/user-edited-succesfully-page/user-edited-succesfully-page.component";
 export interface UserDetails{
   id:string;
   name:string;
@@ -12,6 +16,8 @@ export interface UserDetails{
   balance:number;
   email:string;
   role:string
+  dateOfRegister:string
+  error:any
 }
 @Component({
   selector: 'app-user-details',
@@ -20,17 +26,8 @@ export interface UserDetails{
 })
 export class UserDetailsComponent implements OnInit{
 
-  users1:UserDetails[]=[];
-    users: UserDetails[] = [
-    {
-      id: '1',
-      name: 'John Doe',
-      address: '123 Main Street, Cityville, USA',
-      balance: 1000,
-      email: 'john.doe@example.com',
-      role: 'User'
-    }]
-  constructor(private userService:UserService,private router:Router,private modalService: NgbModal, private http: HttpClient, private transactionService: TransactionService,private zone: NgZone) {
+    users: UserDetails[] = []
+  constructor(private adminService:AdminService,private router:Router,private modalService: NgbModal, private http: HttpClient, private transactionService: TransactionService,private zone: NgZone) {
   }
 
   getUsers(){
@@ -39,6 +36,17 @@ export class UserDetailsComponent implements OnInit{
   }
   ngOnInit() {
 
+    this.zone.run(() => {
+      this.adminService.getAllUsers().subscribe(
+        (response) => {
+          // Handle the response
+          this.users = response.data;
+        },
+        (error) => {
+          console.error('Error fetching users:', error);
+        }
+      )
+    })
   }
 
 }

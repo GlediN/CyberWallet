@@ -1,50 +1,48 @@
 import { Component } from '@angular/core';
+import {AdminService} from "../../../../admin.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TransactionService} from "../../../../transaction.service";
 import {Router} from "@angular/router";
 import {DepositService} from "../../../../deposit.service";
-import {AdminService} from "../../../../admin.service";
-import {
-  TransactionFailedPageComponent
-} from "../../../Response  Pages/transaction-failed-page/transaction-failed-page.component";
 import {
   UserEditedSuccesfullyPageComponent
 } from "../user-edited-succesfully-page/user-edited-succesfully-page.component";
+import {UserEditingFailedComponent} from "../user-editing-failed/user-editing-failed.component";
 
 @Component({
-  selector: 'app-user-name-editor',
-  templateUrl: './user-name-editor.component.html',
-  styleUrl: './user-name-editor.component.scss'
+  selector: 'app-edit-user-address',
+  templateUrl: './edit-user-address.component.html',
+  styleUrl: './edit-user-address.component.scss'
 })
-export class UserNameEditorComponent {
+export class EditUserAddressComponent {
   constructor(private adminService:AdminService,private modalService: NgbModal, private transactionService: TransactionService, private router: Router,private depositService:DepositService) {
   }
-  newUsername='';
+  newAddress='';
   email='';
 
   transaction(){
     const data={
       email: this.email,
-      name:this.newUsername,
+      address:this.newAddress,
     }
-    this.adminService.updateName(data).subscribe(
+    this.adminService.updateAddress(data).subscribe(
       (error) => {
         console.log(data);
         this.modalService.dismissAll();
         this.modalService.open(UserEditedSuccesfullyPageComponent)
+
+
       },
       (error) => {
         console.error(error);
         this.modalService.dismissAll();
-        this.modalService.open(TransactionFailedPageComponent);
+        this.modalService.open(UserEditingFailedComponent);
       }
     );
-      this.modalService.open(UserNameEditorComponent)
 
   }
   closeForm() {
     this.modalService.dismissAll();
     document.body.classList.remove('modal-open');
   }
-
 }

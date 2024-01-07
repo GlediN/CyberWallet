@@ -28,8 +28,14 @@ import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { LoginFailedPageComponent } from './pages/Response  Pages/login-failed-page/login-failed-page.component';
 import {NgOptimizedImage} from "@angular/common";
 import { EditUsersComponent } from './pages/admin-dashboard/edit-users/edit-users.component';
-import { UserNameEditorComponent } from './pages/admin-dashboard/ModalPages/user-name-editor/user-name-editor.component';
+import { UserNameEditorComponent } from './pages/admin-dashboard/ModalPages/edit-user-name/user-name-editor.component';
 import { UserEditedSuccesfullyPageComponent } from './pages/admin-dashboard/ModalPages/user-edited-succesfully-page/user-edited-succesfully-page.component';
+import { EditUserEmailComponent } from './pages/admin-dashboard/ModalPages/edit-user-email/edit-user-email.component';
+import { UserEditingFailedComponent } from './pages/admin-dashboard/ModalPages/user-editing-failed/user-editing-failed.component';
+import { EditUserBalanceComponent } from './pages/admin-dashboard/ModalPages/edit-user-balance/edit-user-balance.component';
+import { EditUserPasswordComponent } from './pages/admin-dashboard/ModalPages/edit-user-password/edit-user-password.component';
+import { EditUserAddressComponent } from './pages/admin-dashboard/ModalPages/edit-user-address/edit-user-address.component';
+import { EditUserRoleComponent } from './pages/admin-dashboard/ModalPages/edit-user-role/edit-user-role.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +62,12 @@ import { UserEditedSuccesfullyPageComponent } from './pages/admin-dashboard/Moda
     EditUsersComponent,
     UserNameEditorComponent,
     UserEditedSuccesfullyPageComponent,
+    EditUserEmailComponent,
+    UserEditingFailedComponent,
+    EditUserBalanceComponent,
+    EditUserPasswordComponent,
+    EditUserAddressComponent,
+    EditUserRoleComponent,
   ], imports: [
     BrowserModule,
     NgbModule,

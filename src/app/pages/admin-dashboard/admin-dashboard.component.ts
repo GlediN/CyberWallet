@@ -27,6 +27,11 @@ export class AdminDashboardComponent implements OnInit{
   }
   ngOnInit() {
     const userEmail = sessionStorage.getItem('email');
+    const userModal=sessionStorage.getItem("showUserEditedSuccess")
+    // @ts-ignore
+    if (userModal===true){
+      this.router.navigate(["/admin/user"])
+    }
     // @ts-ignore
     this.userService.isAdmin(userEmail).subscribe(
       (response) => {
@@ -43,5 +48,6 @@ export class AdminDashboardComponent implements OnInit{
         this.router.navigate([''])
       }
     )
+
   }
 }
