@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {Transaction} from "./pages/admin-dashboard/dashboard/dashboard.component";
 
 @Injectable({
   providedIn: 'root'
@@ -94,5 +95,16 @@ export class AdminService {
       })
       : new HttpHeaders().set('Content-Type', 'application/json');
     return this.httpClient.post(this.url + "/admin/getAllUsers",null, {headers});
+  }
+  getTransactionsByDate(data: any): Observable<Transaction[]> {
+    const token = sessionStorage.getItem('token');
+    const headers = token
+      ? new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      })
+      : new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.httpClient.post<Transaction[]>(this.url + "/admin/getTransactionsByDate", data, { headers });
   }
 }

@@ -11,6 +11,7 @@ import {AdminDashboardComponent} from "./pages/admin-dashboard/admin-dashboard.c
 import {DashboardComponent} from "./pages/admin-dashboard/dashboard/dashboard.component";
 import {UserDetailsComponent} from "./pages/admin-dashboard/user-details/user-details.component";
 import {DepositPageComponent} from "./pages/User Pages/deposit-page/deposit-page.component";
+import {GifcardGeneratorComponent} from "./pages/admin-dashboard/gifcard-generator/gifcard-generator.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -30,6 +31,7 @@ const routes: Routes = [
     },
       {path: '', component: DashboardComponent}
     ,{path: 'user',component:UserDetailsComponent}
+    ,{path: 'giftcard',component:GifcardGeneratorComponent}
     ]
   },
   {path:'deposit',component:DepositPageComponent}

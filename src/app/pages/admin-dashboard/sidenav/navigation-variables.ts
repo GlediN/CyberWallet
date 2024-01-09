@@ -9,6 +9,11 @@ export const navbarData = [
     icon: 'fal fa-users',
     label: 'User Details'
   },
+  // {
+  //   routeLink: 'giftcard',
+  //   icon: 'fal fa-credit-card',
+  //   label: 'Gift Card Codes'
+  // },
   {
     routeLink: '',
     icon: 'fal fa-home',

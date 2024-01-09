@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClient} from "@angular/common/http";
 import {LoginPageComponent} from "../../pages/User Pages/login-page/login-page.component";
 import {HomePageComponent} from "../../pages/User Pages/home-page/home-page.component";
+import {SignupPageComponent} from "../../pages/User Pages/signup-page/signup-page.component";
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -19,6 +20,9 @@ export class HeaderComponent implements OnInit{
   openLoginForm() {
      this.modalService.open(LoginPageComponent);
 
+  }
+  openSignupForm(){
+    this.modalService.open(SignupPageComponent,{size:"lg"})
   }
 
   isLoggedIn(){

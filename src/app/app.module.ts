@@ -36,6 +36,9 @@ import { EditUserBalanceComponent } from './pages/admin-dashboard/ModalPages/edi
 import { EditUserPasswordComponent } from './pages/admin-dashboard/ModalPages/edit-user-password/edit-user-password.component';
 import { EditUserAddressComponent } from './pages/admin-dashboard/ModalPages/edit-user-address/edit-user-address.component';
 import { EditUserRoleComponent } from './pages/admin-dashboard/ModalPages/edit-user-role/edit-user-role.component';
+import { SignupSuccessPageComponent } from './pages/Response  Pages/signup-success-page/signup-success-page.component';
+import { SignupFailedPageComponent } from './pages/Response  Pages/signup-failed-page/signup-failed-page.component';
+import { GifcardGeneratorComponent } from './pages/admin-dashboard/gifcard-generator/gifcard-generator.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +71,9 @@ import { EditUserRoleComponent } from './pages/admin-dashboard/ModalPages/edit-u
     EditUserPasswordComponent,
     EditUserAddressComponent,
     EditUserRoleComponent,
+    SignupSuccessPageComponent,
+    SignupFailedPageComponent,
+    GifcardGeneratorComponent,
   ], imports: [
     BrowserModule,
     NgbModule,

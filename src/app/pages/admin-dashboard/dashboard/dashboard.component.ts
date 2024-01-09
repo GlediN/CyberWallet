@@ -3,6 +3,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {HttpClient} from "@angular/common/http";
 import {TransactionService} from "../../../transaction.service";
 import {Router} from "@angular/router";
+import {AdminService} from "../../../admin.service";
 export interface Transaction {
   id: string;
   recipient: string;
@@ -17,13 +18,30 @@ export interface Transaction {
 })
 export class DashboardComponent implements OnInit {
   recentTransactions: Transaction[] = [];
-  searchDate: string = '';
+  date: string = '';
 
-  constructor(private zone: NgZone,private router:Router,private modalService: NgbModal, private http: HttpClient, private transactionService: TransactionService) {
+  constructor(private zone: NgZone,private adminService:AdminService,private transactionService: TransactionService,) {
   }
 
   retrieveDate() {
-    console.log(this.searchDate);
+    const date = this.date;
+
+    // Assuming this.date is a string in the format "YYYY-MM-DD"
+    const requestData = {
+      date: date
+    };
+
+    this.adminService.getTransactionsByDate(requestData).subscribe(
+      (response: Transaction[]) => {
+        // Handle the response
+        console.log('Recent Transactions:', response);
+        this.recentTransactions = response;
+      },
+      (error) => {
+        this.recentTransactions=[];
+        console.error('Error fetching recent transactions by date:', error);
+      }
+    );
   }
 
   ngOnInit() {
@@ -44,4 +62,5 @@ export class DashboardComponent implements OnInit {
 
 
   })}
+
 }
