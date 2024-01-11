@@ -21,6 +21,9 @@ export class DepositPageComponent {
     document.body.classList.remove('modal-open');
   }
 
+  transactionFailed = false;
+  errorMessage: string = '';
+
   transaction() {
    const transactionDetails = {
       code:this.code,
@@ -29,17 +32,13 @@ export class DepositPageComponent {
 
     this.depositService.deposit(transactionDetails).subscribe(
       (error) => {
-        console.log(transactionDetails);
-        sessionStorage.setItem('showDepositTransactionSuccessModal', 'true');
-        window.location.reload();
+        this.modalService.dismissAll()
       },
       (error) => {
-        this.modalService.open(TransactionFailedPageComponent);
-        console.error('Transaction failed:', error);
-        console.log(transactionDetails)
+        this.transactionFailed=true;
+        this.errorMessage = 'Deposit failed. Please check if your code matches the value.';
       }
     );
-    this.modalService.dismissAll();
   }
 
 

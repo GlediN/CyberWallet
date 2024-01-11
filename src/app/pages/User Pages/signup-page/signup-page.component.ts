@@ -14,6 +14,10 @@ export class SignupPageComponent {
   password='';
   name='';
   address='';
+
+  signUpFailed = false;
+  errorMessage: string = '';
+
   constructor(private modalService:NgbModal,private userService:UserService){}
   closeForm() {
     this.modalService.dismissAll();
@@ -29,13 +33,15 @@ export class SignupPageComponent {
     this.userService.signup(data).subscribe(
       (response) => {
         // Handle the response
-        this.modalService.dismissAll()
-        this.modalService.open(SignupSuccessPageComponent)
+        // this.modalService.dismissAll()
+        // this.modalService.open(SignupSuccessPageComponent)
 
       },
       (error) => {
-        this.modalService.dismissAll()
-        this.modalService.open(SignupFailedPageComponent)
+        this.signUpFailed = true;
+        this.errorMessage = 'Sign up failed. Please check your information.';
+        // this.modalService.dismissAll()
+        // this.modalService.open(SignupFailedPageComponent)
         console.error('Error fetching recent transactions:', error);
       }
     )

@@ -1,0 +1,14 @@
+/* your.component.css */
+
+.has-error input,
+.has-error textarea {
+  border-color: red !important;
+}
+
+.has-error{
+  color: red;
+}
+.error-text{
+  color: red;
+}
+

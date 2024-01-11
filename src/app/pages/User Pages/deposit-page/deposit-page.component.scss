@@ -1,5 +1,15 @@
 .min-vh-100 {
   min-height: 65vh !important;
   min-width: 30vh !important;
+}
+.is-invalid {
+  border-color: red;
+}
 
+.error-text {
+  color: red;
+}
+.has-error input,
+.has-error textarea {
+  border-color: red !important;
 }

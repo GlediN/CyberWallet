@@ -19,6 +19,9 @@ export class WithdrawPageComponent {
     document.body.classList.remove('modal-open');
   }
 
+  transactionFailed = false;
+  errorMessage: string = '';
+
   transaction() {
     let email = sessionStorage.getItem("email");
     if(!email) {
@@ -34,17 +37,15 @@ export class WithdrawPageComponent {
 
     this.transactionService.withdraw(transactionDetails).subscribe(
       (error) => {
-        console.log(transactionDetails);
-        // Write your navigation logic here. For instance:
-        sessionStorage.setItem('showWithdrawTransactionSuccessModal', 'true');
-        window.location.reload();
+        this.modalService.dismissAll();
+
       },
       (error) => {
-        console.error('Transaction failed:', error);
-        this.modalService.open(TransactionFailedPageComponent)
+        this.transactionFailed=true;
+        this.errorMessage = 'Withdraw failed. Please check your balance.';
+        // console.error('Transaction failed:', error);
+        // this.modalService.open(TransactionFailedPageComponent)
       }
     );
-
-    this.modalService.dismissAll();
   }
 }

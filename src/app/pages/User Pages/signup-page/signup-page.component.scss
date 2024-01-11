@@ -1,0 +1,13 @@
+/* your.component.css */
+
+.is-invalid {
+  border-color: red;
+}
+
+.error-text {
+  color: red;
+}
+.has-error input,
+.has-error textarea {
+  border-color: red !important;
+}

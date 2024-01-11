@@ -17,6 +17,10 @@ export class TransactionPageComponent {
   recipient: string = '';
   description: string = '';
   amount:number=0;
+
+  transactionFailed = false;
+  errorMessage: string = '';
+
   closeForm() {
     this.modalService.dismissAll();
     document.body.classList.remove('modal-open');
@@ -40,20 +44,18 @@ export class TransactionPageComponent {
 
     this.transactionService.transaction(transactionDetails).subscribe(
       (error) => {
-        console.log(transactionDetails);
-        // Write your navigation logic here. For instance:
-        // this.router.navigate(['/dashboard']);
-        sessionStorage.setItem('showTransactionSuccessModal', 'true');
-        window.location.reload();
+        this.modalService.dismissAll()
 
       },
       (error) => {
-        this.modalService.open(TransactionFailedPageComponent)
+        this.transactionFailed=true;
+        this.errorMessage = 'Transaction failed. Please check your balance.';
+        // this.modalService.open(TransactionFailedPageComponent)
         console.error('Transaction failed:', error);
       }
     );
 
-    this.modalService.dismissAll();
+    // this.modalService.dismissAll();
   }
 
 }

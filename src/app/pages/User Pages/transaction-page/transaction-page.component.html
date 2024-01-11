@@ -15,16 +15,18 @@
             <form>
               <div class="mb-3">
                 <label for="recipent" class="form-label">To</label>
-                <input type="text" class="form-control" id="recipent" aria-describedby="textHelp" style="width: 100%;" name="recipient" [(ngModel)]="recipient">
+                <input type="text" class="form-control" id="recipent" aria-describedby="textHelp" style="width: 100%;" name="recipient" [(ngModel)]="recipient" [ngClass]="{'is-invalid': transactionFailed}">
               </div>
               <div class="mb-4">
                 <label for="transactionMessage" class="form-label">Your Message</label>
-                <input type="text" class="form-control" id="transactionMessage" style="width: 100%;" name="description" [(ngModel)]="description">
+                <input type="text" class="form-control" id="transactionMessage" style="width: 100%;" name="description" [(ngModel)]="description" [ngClass]="{'is-invalid': transactionFailed}">
               </div>
               <div class="mb-4">
                 <label for="transferAmount" class="form-label">Amount</label>
-                <input type="number" class="form-control" id="transferAmount" style="width: 100%;" name="amount" [(ngModel)]="amount">
+                <input type="number" class="form-control" id="transferAmount" style="width: 100%;" name="amount" [(ngModel)]="amount" [ngClass]="{'is-invalid': transactionFailed}">
               </div>
+              <p *ngIf="transactionFailed" class="error-text">{{ errorMessage }}</p>
+
               <div class="d-flex align-items-center justify-content-center">
                 <button class="btn btn-default  waves-effect  send-funds">
                   <a class="text-black fw-bold ms-2 send-funds"  (click)="transaction()">Send Funds</a>

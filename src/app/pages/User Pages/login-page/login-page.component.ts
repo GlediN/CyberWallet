@@ -19,6 +19,8 @@ export class LoginPageComponent {
     this.modalService.dismissAll();
   }
 
+  loginFailed = false;
+  errorMessage: string = '';
 
   email: string = "";
   password: string = "";
@@ -29,16 +31,18 @@ export class LoginPageComponent {
     };
     this.userService.login(credentials).subscribe(
       (response: any) => {
+        this.modalService.dismissAll()
         sessionStorage.setItem('token', response.token);
         sessionStorage.setItem('email', response.email)
         this.router.navigate(['/dashboard']);
       },
       (error) => {
-        this.modalService.dismissAll()
-        this.modalService.open(LoginFailedPageComponent)
-        console.error('Login failed:', error);
+        this.loginFailed=true;
+        this.errorMessage = 'Login failed. Please check your credentials.';
+        // this.modalService.dismissAll()
+        // this.modalService.open(LoginFailedPageComponent)
       }
     )
-    this.modalService.dismissAll();
+    // this.modalService.dismissAll();
   }
 }

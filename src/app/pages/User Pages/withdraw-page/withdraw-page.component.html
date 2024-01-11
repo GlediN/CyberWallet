@@ -15,8 +15,10 @@
             <form>
               <div class="mb-4">
                 <label for="transferAmount" class="form-label">Amount</label>
-                <input type="number" class="form-control" id="transferAmount" style="width: 100%;" name="amount" [(ngModel)]="amount">
+                <input type="number" class="form-control" id="transferAmount" style="width: 100%;" name="amount" [(ngModel)]="amount" [ngClass]="{'is-invalid': transactionFailed}">
               </div>
+              <p *ngIf="transactionFailed" class="error-text">{{ errorMessage }}</p>
+
               <div class="d-flex align-items-center justify-content-center">
                 <button class="btn btn-default  waves-effect  send-funds">
                   <a class="text-black fw-bold ms-2 send-funds"  (click)="transaction()">Withdraw Funds</a>
