@@ -9,6 +9,7 @@ import {DepositPageComponent} from "../deposit-page/deposit-page.component";
 import {WithdrawPageComponent} from "../withdraw-page/withdraw-page.component";
 import {Router} from "@angular/router";
 import {UserService} from "../../../user.service";
+import {interval, Subscription} from "rxjs";
 
 export interface Transaction {
   id: string;
@@ -41,13 +42,9 @@ export class UserDashboardComponent implements OnInit {
   isTransactionSuccessful(transactionStatus: boolean): boolean {
     return transactionStatus;
   }
+  private intervalSubscription: Subscription | undefined;
 
-  // Method to get the CSS class based on transaction status
-  getBadgeClass(transactionStatus: boolean): string {
-    return this.isTransactionSuccessful(transactionStatus) ? 'badge bg-success rounded-3 fw-semibold' : 'badge bg-danger rounded-3 fw-semibold';
-  }
   transactionFormValue = ''; // Initialize with an empty object
-
 
   openTransactionForm(value: any) {
     if (this.transactionFormValue=='deposit') {
@@ -62,27 +59,14 @@ export class UserDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    const withdrawModal = sessionStorage.getItem('showWithdrawTransactionSuccessModal');
-    const depositModal = sessionStorage.getItem('showDepositTransactionSuccessModal');
-    const transferModal = sessionStorage.getItem('showTransactionSuccessModal');
-    if (withdrawModal === 'true') {
-      // Show the modal
-      this.modalService.open(TransactionSuccesPageComponent);
-      // Clear the stored information
-      sessionStorage.removeItem('showTransactionSuccessModal');
-    }
-    if (depositModal === 'true') {
-      // Show the modal
-      this.modalService.open(TransactionSuccesPageComponent);
-      // Clear the stored information
-      sessionStorage.removeItem('showDepositTransactionSuccessModal');
-    }
-    if (transferModal === 'true'){
-      this.modalService.open(TransactionSuccesPageComponent);
-      sessionStorage.removeItem('showTransactionSuccessModal');
-    }
-
     this.zone.run(() => {
+      this.dataFetch();//Call first time when the user logs in
+      this.intervalSubscription = interval(5000).subscribe(() => {
+        this.dataFetch(); // Call the method you want to execute every 5 seconds
+      });
+  })}
+
+  dataFetch(){
     const userEmail = sessionStorage.getItem('email');
     // @ts-ignore
     this.transactionService.getRecentTransactions(userEmail).subscribe(
@@ -104,31 +88,30 @@ export class UserDashboardComponent implements OnInit {
         console.error('Error fetching your username:', error);
       }
     )
-      // @ts-ignore
-       this.userService.isAdmin(userEmail).subscribe(
-        (response) => {
-          // Handle the response
-          if (response==true){
-            this.router.navigate(['/admin'])
-          }else if (response==false){
-            this.router.navigate(['dashboard'])
-          }
-        },
-        (error) => {
-          console.error('Error:', error);
-          this.router.navigate([''])
+    // @ts-ignore
+    this.userService.isAdmin(userEmail).subscribe(
+      (response) => {
+        // Handle the response
+        if (response==true){
+          this.router.navigate(['/admin'])
+        }else if (response==false){
+          this.router.navigate(['dashboard'])
         }
-      )
-      // @ts-ignore
-      this.userService.getBalance(userEmail).subscribe(
-        (response) => {
-          // Handle the response
-          this.userBalance=response.balance;
-        },
-        (error) => {
-          console.error('Error:', error);
-        }
-      )
-  })}
-
+      },
+      (error) => {
+        console.error('Error:', error);
+        this.router.navigate([''])
+      }
+    )
+    // @ts-ignore
+    this.userService.getBalance(userEmail).subscribe(
+      (response) => {
+        // Handle the response
+        this.userBalance=response.balance;
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    )
+  }
 }

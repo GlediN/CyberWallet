@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {TransactionService} from "../../../transaction.service";
 import {Router} from "@angular/router";
 import {AdminService} from "../../../admin.service";
+import {interval, Subscription} from "rxjs";
 export interface Transaction {
   id: string;
   recipient: string;
@@ -22,10 +23,10 @@ export class DashboardComponent implements OnInit {
 
   constructor(private zone: NgZone,private adminService:AdminService,private transactionService: TransactionService,) {
   }
+  private intervalSubscription: Subscription | undefined;
 
   retrieveDate() {
     const date = this.date;
-
     // Assuming this.date is a string in the format "YYYY-MM-DD"
     const requestData = {
       date: date
@@ -45,22 +46,25 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    const userEmail = sessionStorage.getItem('email');
     this.zone.run(() => {
-    // @ts-ignore
-    this.transactionService.getAllRecentTransactions(userEmail).subscribe(
-      (response) => {
-        // Handle the response
-        console.log('Recent Transactions:', response);
-        this.recentTransactions = response;
+      this.dataFetch();//Call first time when the user logs in
+      this.intervalSubscription = interval(5000).subscribe(() => {
+        this.dataFetch(); // Call the method you want to execute every 5 seconds
+      });
+    })
+    }
 
-      },
-      (error) => {
-        console.error('Error fetching recent transactions:', error);
-      }
-    )
+  dataFetch(){
+    const userEmail = sessionStorage.getItem('email');
+      // @ts-ignore
+      this.transactionService.getAllRecentTransactions(userEmail).subscribe(
+        (response) => {
+          // Handle the response
+          this.recentTransactions = response;
+        },
+        (error) => {
 
-
-  })}
-
+        }
+      )
+  }
 }
